@@ -26,6 +26,11 @@ esac
 
 apt-get update
 
+if ! command -v uv &>/dev/null; then
+    echo "uv not found, installing via Astral..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+
 if [[ "$ID" == "pve" || "$ID" == "proxmox" ]]; then
   echo "Proxmox detected, skipping qemu-utils"
   apt-get install -y nbdkit libfuse-dev pkg-config git
