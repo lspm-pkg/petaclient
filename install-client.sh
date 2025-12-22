@@ -78,7 +78,7 @@ fi
 
 cd /petaclient
 
-cp -n config.toml.example config.toml
+cp -n config.example.toml config.toml
 
 echo "Please edit /petaclient/config.toml with your settings."
 echo "Press Enter to continue..."
