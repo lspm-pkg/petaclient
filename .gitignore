@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.direnv
+
+# Cache directory
+cache
+
+# Config files
+config.toml
+
+# Mount directory
+mnt
+
+# Databases
+*.db
+db*

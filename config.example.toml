@@ -1,0 +1,9 @@
+[auth]
+# Your PetaServer credentials
+server = "http://127.0.0.1:7004"
+email = ""
+password = ""
+
+[disk]
+# Uses GB with float, please be catious.
+disk_size_gb = 256.0

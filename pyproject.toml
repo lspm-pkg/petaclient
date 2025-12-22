@@ -1,0 +1,19 @@
+[project]
+name = "petafuse"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fuse-python",
+    "httpx>=0.28.1",
+    "requests>=2.32.5",
+    "toml>=0.10.2",
+    "websockets>=15.0.1",
+]
+
+[tool.uv.sources]
+fuse-python = { git = "https://github.com/libfuse/python-fuse.git" }
+
+[tool.basedpyright]
+typeCheckingMode = "standard"
