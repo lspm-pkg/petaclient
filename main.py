@@ -156,7 +156,7 @@ def main():
     try: subprocess.call(["qemu-nbd", "--disconnect", "/dev/nbd0"], stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
     except Exception: pass
     
-    connector = subprocess.Popen(["qemu-nbd", "--connect=/dev/nbd0", "--format=raw", "--cache=none", f"nbd:unix:{SOCKET_PATH}"])
+    connector = subprocess.Popen(["qemu-nbd", "--connect=/dev/nbd0", "--format=raw", "--cache=writeback", f"nbd:unix:{SOCKET_PATH}"])
     
     try:
         print("Waiting for NBD connection...")
