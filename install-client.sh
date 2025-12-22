@@ -14,15 +14,21 @@ fi
 . /etc/os-release
 
 case "$ID" in
-  debian|ubuntu|pve|proxmox)
-    echo "Compatible OS detected: $ID"
+  debian|ubuntu)
+    echo "Debian/Ubuntu detected: $ID"
     ;;
   *)
-    echo "Unsupported OS detected: $ID"
-    echo "This installer only supports Debian, Ubuntu, or Proxmox"
-    exit 1
+    echo "Unknown base OS: $ID"
     ;;
 esac
+
+if dpkg -s proxmox-ve >/dev/null 2>&1; then
+  IS_PVE=1
+  echo "Proxmox VE detected via proxmox-ve package"
+else
+  IS_PVE=0
+  echo "Not Proxmox VE"
+fi
 
 if ! command -v /root/.local/bin/uv &>/dev/null; then
     echo "uv not found, installing via Astral..."
@@ -33,11 +39,9 @@ source /root/.local/bin/env
 
 apt-get update
 
-if [[ "$ID" == "pve" || "$ID" == "proxmox" ]]; then
-  echo "Proxmox detected, skipping qemu-utils"
+if [ "$IS_PVE" -eq 1 ]; then
   apt-get install -y nbdkit libfuse-dev pkg-config git
 else
-  echo "Standard Debian/Ubuntu detected"
   apt-get install -y nbdkit libfuse-dev pkg-config qemu-utils git
 fi
 
@@ -66,8 +70,6 @@ if [[ "$create_account" =~ ^[Yy]$ ]]; then
     -H "Content-Type: application/json" \
     -d "{\"email\":\"$user_email\",\"password\":\"$user_password\",\"terms_accepted\":true}")
   if [[ "$response" == "200" || "$response" == "201" ]]; then
-    echo "Account successfully created!"
-    # Pre-fill config.toml with email, password, and server URL
     sed -i "s|server = .*|server = \"$server_url\"|" config.toml
     sed -i "s|email = .*|email = \"$user_email\"|" config.toml
     sed -i "s|password = .*|password = \"$user_password\"|" config.toml
@@ -116,4 +118,4 @@ echo ""
 echo "Recommended format command:"
 echo "mkfs.btrfs --nodiscard /dev/nbd0"
 echo ""
-echo "It is best to not use discard when formatting to avoid wasting time + on large sizes it could take a very long time."
+echo "Avoid discard on large devices unless you enjoy waiting."
