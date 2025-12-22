@@ -24,7 +24,7 @@ case "$ID" in
     ;;
 esac
 
-if ! command -v uv &>/dev/null; then
+if ! command -v /root/.local/bin/uv &>/dev/null; then
     echo "uv not found, installing via Astral..."
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
