@@ -40,9 +40,9 @@ source /root/.local/bin/env
 apt-get update
 
 if [ "$IS_PVE" -eq 1 ]; then
-  apt-get install -y nbdkit libfuse-dev pkg-config git build-essential
+  apt-get install -y nbdkit libfuse-dev pkg-config git build-essential python3-dev
 else
-  apt-get install -y nbdkit libfuse-dev pkg-config qemu-utils git build-essential
+  apt-get install -y nbdkit libfuse-dev pkg-config qemu-utils git build-essential python3-dev
 fi
 
 cd /
