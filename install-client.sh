@@ -70,9 +70,7 @@ if [[ "$create_account" =~ ^[Yy]$ ]]; then
     -H "Content-Type: application/json" \
     -d "{\"email\":\"$user_email\",\"password\":\"$user_password\",\"terms_accepted\":true}")
   if [[ "$response" == "200" || "$response" == "201" ]]; then
-    sed -i "s|server = .*|server = \"$server_url\"|" config.toml
-    sed -i "s|email = .*|email = \"$user_email\"|" config.toml
-    sed -i "s|password = .*|password = \"$user_password\"|" config.toml
+    echo Success.
   else
     echo "Failed to create account. HTTP status code: $response"
   fi
@@ -83,8 +81,9 @@ cd /petaclient
 cp -n config.toml.example config.toml
 
 echo "Please edit /petaclient/config.toml with your settings."
-echo "Press Enter to continue after editing..."
+echo "Press Enter to continue..."
 read
+nano /petaclient/config.toml
 
 if systemctl list-unit-files | grep -q '^petaserver\.service'; then
     after_line="After=petaserver.service"
