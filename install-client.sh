@@ -97,7 +97,7 @@ Description=Peta Client
 $after_line
 
 [Service]
-ExecStartPre=/sbin/modprobe nbd
+ExecStartPre=/usr/sbin/modprobe nbd
 ExecStart=/root/.local/bin/uv run main.py
 WorkingDirectory=/petaclient
 Restart=always
