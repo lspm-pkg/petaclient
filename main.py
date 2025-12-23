@@ -160,9 +160,9 @@ def main():
         "qemu-nbd",
         "--connect=/dev/nbd0",
         "--format=raw",
-        "--cache=none",
+        "--cache=writeback",
         "--aio=io_uring",
-        "--discard=unmap",
+        "--discard=ignore",
         "--detect-zeroes=unmap",
         f"nbd:unix:{SOCKET_PATH}"
     ])    
