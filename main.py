@@ -163,7 +163,7 @@ def main():
         "--cache=writeback",
         "--aio=io_uring",
         "--discard=ignore",
-        "--detect-zeroes=unmap",
+        "--detect-zeroes=on",
         f"nbd:unix:{SOCKET_PATH}"
     ])    
     try:
