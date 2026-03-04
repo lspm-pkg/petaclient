@@ -47,7 +47,7 @@ fi
 
 cd /
 if [ ! -d petaclient ]; then
-  git clone https://github.com/lspm-pkg/petaclient.git
+  git clone https://github.com/lspm-pkg/petaclient.git -b v3
 else
   echo "petaclient already exists, skipping clone"
 fi
